@@ -8,15 +8,29 @@ class TerminalMain extends React.Component {
         super(props);
 
         this.state = {
-            out: "Welcome to Mukul Goyal's terminal"
+            data: [{
+                key: 0,
+                text: "Welcome to Mukul's terminal"
+            }]
         }
     }
 
+    getNewData = (data) => {
+        const currentState = this.state.data;
+        const newKey = currentState.key + 1;
+        const newState = currentState.concat({ text: data, key: newKey });
+        console.log(newState);
+        this.setState(newState);
+    }
+
     render() {
+
+        const batch = "ubuntu@ubuntu:~$";
+
         return(
             <div>
-                <TerminalPreviousOut data={this.state.out} />
-                <TerminalCurrentLine />    
+                <TerminalPreviousOut data={this.state.data} />
+                <TerminalCurrentLine batch={batch} sendData={this.getNewData} />    
             </div>
         );
     }
